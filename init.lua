@@ -13,6 +13,8 @@ vim.api.nvim_create_user_command("Run", function(opts)
   local infile = opts.args
   if infile == "" then
     infile = vim.fn.expand("%:p:h") .. "/input.txt"
+  elseif infile:sub(1, 1) ~= "/" then
+    infile = vim.fn.expand("%:p:h") .. "/" .. infile
   end
   local cmd = string.format('"%s" < "%s"', outfile, infile)
   vim.cmd('botright 12split | terminal ' .. cmd)
@@ -21,7 +23,7 @@ end, {
     desc = 'Run compiled C++ file with input (can specify)'
 })
 
-vim.api.nvim_create_user_command("CompileRun", function(opts)
+vim.api.nvim_create_user_command("CR", function(opts)
   local file = vim.fn.expand("%:p")
   local outfile = vim.fn.expand("%:p:r")
   local infile = opts.args
@@ -34,7 +36,7 @@ vim.api.nvim_create_user_command("CompileRun", function(opts)
   vim.cmd('botright 12split | terminal ' .. cmd)
 end, {
     nargs = '?',
-    desc = 'Compile and run current C++ file with input'
+    desc = 'Compile and run current C++ file with input (usage: :CR [input_file])'
 })
 
 vim.api.nvim_create_user_command("Terminal", function()

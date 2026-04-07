@@ -120,3 +120,4 @@ Two custom commands in `init.lua`:
 |---------|--------|
 | `:Compile` | Compile current C++ file (g++-15, Homebrew GCC, C++23) |
 | `:Run [file]` | Run compiled binary with input |
+| `:CR [file]` | Compile and run in one step (default: input.txt) |
